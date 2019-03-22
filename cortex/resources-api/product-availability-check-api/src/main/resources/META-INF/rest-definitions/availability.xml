@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<definitions xmlns="http://www.elasticpath.com/schema/rest/0.5">
+
+    <family>
+        <name>available</name>
+        <description>
+            <![CDATA[
+Display the [item][items] and line item's availability. The availability identifies the item's
+purchasability. For example, in Elastic Path Commerce Engine the following states are available:
+
+*  _AVAILABLE
+*  NOT\_AVAILABLE
+
+
+[items]: #items
+			]]>
+        </description>
+
+        <resource>
+            <name>availability-for-item</name>
+            <description><![CDATA[The item's availability. The availability identifies the item's purchasability.]]></description>
+            <uri>{base.family}/{items.item}/form</uri>
+           <form>
+               <entity>availability</entity>
+               <action-rel>checkavailabilityaction</action-rel>
+               <result>availability-status</result>
+           </form>
+        </resource>
+        <resource>
+            <name>availability-status</name>
+            <description><![CDATA[The item's availability. The availability identifies the item's purchasability.]]></description>
+            <uri>{base.family}/{items.item}/status</uri>
+            <entity>availability</entity>
+        </resource>
+        <relationship>
+            <name>item-to-availability</name>
+            <description><![CDATA[Read an item's availability. The availability rule identifies the item's purchasability.]]></description>
+            <rel>zipcode-availability</rel>
+            <rev>item</rev>
+            <from>items.item</from>
+            <to>availability-for-item</to>
+        </relationship>
+
+        <entity>
+            <name>availability</name>
+            <description><![CDATA[The availability information for an item.]]></description>
+            <property>
+                <name>zipcode</name>
+                <description>
+                    <![CDATA[The state of availability for an item or line item. In Elastic Path Commerce Engine, the states are:]]>
+                </description>
+                <string/>
+            </property>
+            <property>
+                <name>status</name>
+                <description>
+                    <![CDATA[The state of availability for an item or line item. In Elastic Path Commerce Engine, the states are:]]>
+                </description>
+                <string/>
+            </property>
+            <entity-type>available.availability</entity-type>
+        </entity>
+
+    </family>
+</definitions>
